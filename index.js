@@ -1,11 +1,31 @@
-var _ = require('lodash');
 var imageMagick = require('gm').subClass({ imageMagick: true });
 
-module.exports = function createThumb(buf, opt, cb) {
+var defaults = {
+  width: 120,
+  height: 100,
+  align: 'center'
+};
 
-  var w = _.isString(opt.width) ? parseInt(opt.width, 10) : opt.width;
-  var h = _.isString(opt.height) ? parseInt(opt.height, 10) : opt.height;
-  var align = opt.align || 'center';
+function isString(value) {
+  return typeof value === 'string';
+}
+
+function extend(obj) {
+  Array.prototype.slice.call(arguments, 1).forEach(function (source) {
+    if (source) {
+      for (var prop in source) {
+        obj[prop] = source[prop];
+      }
+    }
+  });
+  return obj;
+}
+
+module.exports = function createThumb(buf, options, cb) {
+
+  var opt = extend({}, defaults, options);
+  var w = isString(opt.width) ? parseInt(opt.width, 10) : opt.width;
+  var h = isString(opt.height) ? parseInt(opt.height, 10) : opt.height;
   var w1, h1;
   var xoffset = 0;
   var yoffset = 0;
@@ -34,7 +54,7 @@ module.exports = function createThumb(buf, opt, cb) {
       h1 = bigger;
     }
 
-    if (align == 'center') {
+    if (opt.align === 'center') {
       if (w < w1) {
         xoffset = (w1 - w) / 2;
       }
