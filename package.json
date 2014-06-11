@@ -1,0 +1,35 @@
+{
+  "name": "thumb",
+  "version": "0.0.0",
+  "description": "",
+  "keywords": [
+    "thumb",
+    "thumbnail"
+  ],
+  "author": "WRANGR <hi@wrangr.com>",
+  "maintainers": [
+    "lupomontero <lupomontero@gmail.com> (http://lupomontero.com)"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:wrangr/thumb.git"
+  },
+  "bugs": {
+    "url": "https://github.com/wrangr/thumb/issues"
+  },
+  "dependencies": {
+    "gm": "^1.16.0",
+    "lodash": "^2.4.1"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.2",
+    "grunt-contrib-jshint": "^0.10.0",
+    "grunt-contrib-nodeunit": "~0.4.0"
+  },
+  "scripts": {
+    "test": "grunt --verbose"
+  },
+  "engines": {
+    "node": ">= 0.10.x"
+  }
+}
