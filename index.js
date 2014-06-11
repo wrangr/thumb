@@ -2,6 +2,7 @@ var _ = require('lodash');
 var imageMagick = require('gm').subClass({ imageMagick: true });
 
 module.exports = function createThumb(buf, opt, cb) {
+
   var w = _.isString(opt.width) ? parseInt(opt.width, 10) : opt.width;
   var h = _.isString(opt.height) ? parseInt(opt.height, 10) : opt.height;
   var align = opt.align || 'center';
@@ -15,30 +16,30 @@ module.exports = function createThumb(buf, opt, cb) {
 
     if (size.width < size.height) {
       w1 = w;
-      h1 = Math.floor(size.height * (w/size.width));
+      h1 = Math.floor(size.height * (w / size.width));
       if (h1 < h) {
-        w1 = Math.floor(w1 * (((h-h1)/h) + 1));
+        w1 = Math.floor(w1 * (((h - h1) / h) + 1));
         h1 = h;
       }
     } else if (size.width > size.height) {
       h1 = h;
-      w1 = Math.floor(size.width * (h/size.height));
+      w1 = Math.floor(size.width * (h / size.height));
       if (w1 < w) {
-        h1 = Math.floor(h1 * (((w-w1)/w) + 1));
+        h1 = Math.floor(h1 * (((w - w1) / w) + 1));
         w1 = w;
       }
     } else if (size.width == size.height) {
-      var bigger = (w>h?w:h);
+      var bigger = (w > h ? w : h);
       w1 = bigger;
       h1 = bigger;
     }
 
     if (align == 'center') {
       if (w < w1) {
-        xoffset = (w1-w)/2;
+        xoffset = (w1 - w) / 2;
       }
       if (h < h1) {
-        yoffset = (h1-h)/2;
+        yoffset = (h1 - h) / 2;
       }
     }
 
@@ -50,5 +51,6 @@ module.exports = function createThumb(buf, opt, cb) {
       .noProfile()
       .toBuffer(cb);
   });
+
 };
 
